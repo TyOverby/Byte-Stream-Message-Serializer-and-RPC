@@ -5,12 +5,12 @@ import java.nio.ByteBuffer;
 
 public class Message {
 	
-	public final int type;
-	public int id;
-	public int length;
+	public final byte type;
+	public byte id;
+	public byte length;
 	public final byte[] payload;
 	
-	public Message(int type, int id, byte... payload) throws IllegalArgumentException{
+	public Message(byte type, byte id, byte... payload) throws IllegalArgumentException{
 		this.type = type;
 		this.id = id;
 		this.payload = payload;
@@ -19,7 +19,7 @@ public class Message {
 			throw new IllegalArgumentException("Payload is too high");
 		}
 		else{
-			this.length = payload.length;
+			this.length = (byte) payload.length;
 		}
 	}
 	
