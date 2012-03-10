@@ -50,13 +50,13 @@ public class RobotControllerProtocol extends Protocol{
 	}
 
         public void sendSoundMessage(byte sound) throws IOException{
-            int command = types.INDIVIDUAL_WHEELS;
-		int rpcID   = 0;
+            byte command = types.INDIVIDUAL_WHEELS;
+            byte rpcID   = 0;
 
-		byte[] payload = {sound};
+            byte[] payload = {sound};
 
-		Message m = new Message(command,rpcID,payload);
+            Message m = new Message(command,rpcID,payload);
 
-		serializer.sendMessage(m);
+            serializer.sendMessage(m);
         }
 }
