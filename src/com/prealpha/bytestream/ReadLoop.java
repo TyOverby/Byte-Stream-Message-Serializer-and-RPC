@@ -1,15 +1,15 @@
 package com.prealpha.bytestream;
-import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class ReadLoop implements Runnable {
 
-	private DataInputStream in;
+	private InputStream in;
 	private MessageSerializer ms;
 	private boolean isReading;
 	
-	public ReadLoop(DataInputStream dis,MessageSerializer ms){
+	public ReadLoop(InputStream dis,MessageSerializer ms){
 		this.in = dis;
 		this.ms = ms;
 	}
@@ -21,12 +21,12 @@ public class ReadLoop implements Runnable {
 		while(isReading){
 			try {
 				
-				byte type       = in.readByte();
-				byte id         = in.readByte();
-				byte length     = in.readByte();
+				byte type       = (byte)in.read();
+				byte id         = (byte)in.read();
+				byte length     = (byte)in.read();
 				byte[] payload = new byte[length]; 
 				for(int i=0;i<length;i++){
-					payload[i]=in.readByte();
+					payload[i]=(byte)in.read();
 				}
 				
 				
