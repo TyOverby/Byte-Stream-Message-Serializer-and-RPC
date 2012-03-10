@@ -2,6 +2,8 @@ package com.prealpha.bytestream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,13 +19,13 @@ public class MessageSerializer {
 	Set<Integer> takenKeys = new HashSet<Integer>();
 	Map<Integer,Message> rpcMessages = new HashMap<Integer,Message>();
 	
-	public MessageSerializer(DataInputStream in, DataOutputStream out){
-		this.out      = out;
+	public MessageSerializer(InputStream in, OutputStream out){
+		this.out      = (DataOutputStream) out;
 		
-		ReadLoop readLoop = new ReadLoop(in,this);
+		ReadLoop readLoop = new ReadLoop((DataInputStream) in,this);
 		new Thread(readLoop).start();
 	}
-	public MessageSerializer(DataInputStream in, DataOutputStream out, MessageListener ml){
+	public MessageSerializer(InputStream in, OutputStream out, MessageListener ml){
 		this(in,out);
 		this.messageListeners.add(ml);
 	}
