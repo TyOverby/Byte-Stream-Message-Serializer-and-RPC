@@ -1,6 +1,4 @@
 package com.prealpha.bytestream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,16 +11,16 @@ import java.util.Set;
 
 
 public class MessageSerializer {
-	private final DataOutputStream out;
+	private final OutputStream out;
 	private final List<MessageListener> messageListeners = new ArrayList<MessageListener>();
 	
 	Set<Byte> takenKeys = new HashSet<Byte>();
 	Map<Byte,Message> rpcMessages = new HashMap<Byte,Message>();
 	
 	public MessageSerializer(InputStream in, OutputStream out){
-		this.out      = (DataOutputStream) out;
+		this.out      = out;
 		
-		ReadLoop readLoop = new ReadLoop((DataInputStream) in,this);
+		ReadLoop readLoop = new ReadLoop(in,this);
 		new Thread(readLoop).start();
 	}
 	public MessageSerializer(InputStream in, OutputStream out, MessageListener ml){
