@@ -7,6 +7,7 @@ public class RobotControllerProtocol extends Protocol{
 		public static final int UNKNOWN  = 0;
 		public static final int BOTH_WHEELS  = 1;
 		public static final int INDIVIDUAL_WHEELS    = 2;
+                public static final int SOUND = 3;
 	}
 
 	public RobotControllerProtocol(MessageSerializer serializer) {
@@ -48,4 +49,14 @@ public class RobotControllerProtocol extends Protocol{
 		sendMessageToIndividualWheels(time, (byte)180, (byte)0);
 	}
 
+        public void sendSoundMessage(byte sound) throws IOException{
+            byte command = types.INDIVIDUAL_WHEELS;
+            byte rpcID   = 0;
+
+            byte[] payload = {sound};
+
+            Message m = new Message(command,rpcID,payload);
+
+            serializer.sendMessage(m);
+        }
 }
