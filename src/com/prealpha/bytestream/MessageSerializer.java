@@ -21,7 +21,7 @@ public class MessageSerializer {
 		this.out      = out;
 		
 		ReadLoop readLoop = new ReadLoop(in,this);
-		new Thread(readLoop).start();
+		//new Thread(readLoop).start();
 	}
 	public MessageSerializer(InputStream in, OutputStream out, MessageListener ml){
 		this(in,out);
