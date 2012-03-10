@@ -14,8 +14,8 @@ public class RobotControllerProtocol extends Protocol{
 	}
 
 	public void sendMessageToBothWheels(byte time, byte speed) throws IOException{
-		int command = types.BOTH_WHEELS;
-		int rpcID   = 0;
+		byte command = types.BOTH_WHEELS;
+		byte rpcID   = 0;
 
 		byte[] payload = {time,speed};
 
@@ -31,8 +31,8 @@ public class RobotControllerProtocol extends Protocol{
 	}
 	
 	public void sendMessageToIndividualWheels(byte time, byte portWheelSpeed, byte starboardWheelSpeed) throws IOException{
-		int command = types.INDIVIDUAL_WHEELS;
-		int rpcID   = 0;
+		byte command = types.INDIVIDUAL_WHEELS;
+		byte rpcID   = 0;
 
 		byte[] payload = {time,portWheelSpeed,starboardWheelSpeed};
 

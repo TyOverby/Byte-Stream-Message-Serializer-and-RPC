@@ -21,9 +21,9 @@ public class ReadLoop implements Runnable {
 		while(isReading){
 			try {
 				
-				int type       = in.readInt();
-				int id         = in.readInt();
-				int length     = in.readInt();
+				byte type       = in.readByte();
+				byte id         = in.readByte();
+				byte length     = in.readByte();
 				byte[] payload = new byte[length]; 
 				for(int i=0;i<length;i++){
 					payload[i]=in.readByte();

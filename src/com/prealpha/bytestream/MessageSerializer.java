@@ -16,8 +16,8 @@ public class MessageSerializer {
 	private final DataOutputStream out;
 	private final List<MessageListener> messageListeners = new ArrayList<MessageListener>();
 	
-	Set<Integer> takenKeys = new HashSet<Integer>();
-	Map<Integer,Message> rpcMessages = new HashMap<Integer,Message>();
+	Set<Byte> takenKeys = new HashSet<Byte>();
+	Map<Byte,Message> rpcMessages = new HashMap<Byte,Message>();
 	
 	public MessageSerializer(InputStream in, OutputStream out){
 		this.out      = (DataOutputStream) out;
@@ -41,8 +41,8 @@ public class MessageSerializer {
 		this.messageListeners.remove(ml);
 	}
 	
-	public int getPossibleKey(){
-		for(int i=1;i<Integer.MAX_VALUE;i++){
+	public byte getPossibleKey(){
+		for(byte i=1;i<Byte.MAX_VALUE;i++){
 			if(!rpcMessages.containsKey(i)){
 				return i;
 			}
@@ -67,7 +67,7 @@ public class MessageSerializer {
 	}
 	
 	public Message sendRPC(Message m){
-		int id = getPossibleKey();
+		byte id = getPossibleKey();
 		takenKeys.add(id);
 		m.id = id;
 		
