@@ -1,16 +1,17 @@
 package com.prealpha.bytestream;
-import java.nio.ByteBuffer;
+import java.io.IOException;
+import java.io.OutputStream;
 
 
 
 public class Message {
 	
-	public final byte type;
-	public byte id;
-	public byte length;
-	public final byte[] payload;
+	public final int type;
+	public int id;
+	public int length;
+	public final int[] payload;
 	
-	public Message(byte type, byte id, byte... payload) throws IllegalArgumentException{
+	public Message(int type, int id, int... payload) throws IllegalArgumentException{
 		this.type = type;
 		this.id = id;
 		this.payload = payload;
@@ -19,22 +20,17 @@ public class Message {
 			throw new IllegalArgumentException("Payload is too high");
 		}
 		else{
-			this.length = (byte) payload.length;
+			this.length = payload.length;
 		}
 	}
 	
-	public byte[] toBytes(){
-		final int intSize = Integer.SIZE/8;
+	public void writeOut(OutputStream os) throws IOException{
+		os.write(type);
+		os.write(id);
+		os.write(length);
 		
-		final int messageSize = intSize*3+length;
-		
-		ByteBuffer bb = ByteBuffer.allocate(messageSize);
-		
-		bb.putInt(type);
-		bb.putInt(id);
-		bb.putInt(length);
-		bb.put(payload);
-		
-		return bb.array();
+		for(int i=0;i<payload.length;i++){
+			os.write(payload[i]);
+		}
 	}
 }

@@ -4,11 +4,11 @@ import java.io.IOException;
 
 public class CardReaderProtocol extends Protocol{
 	public static class types{
-		public static final byte UNKNOWN = 0;
-		public static final byte WRITE   = 1;
-		public static final byte READ    = 2;
-		public static final byte FILL    = 3;
-		public static final byte PULL    = 4;
+		public static final int UNKNOWN = 0;
+		public static final int WRITE   = 1;
+		public static final int READ    = 2;
+		public static final int FILL    = 3;
+		public static final int PULL    = 4;
 	}
 	
 	
@@ -16,29 +16,29 @@ public class CardReaderProtocol extends Protocol{
 		super(serializer);
 	}
 
-	public void write(byte location,byte data) throws IOException{
-		byte command = types.WRITE;
-		byte rpcID   = 0;
-		byte[] payload = {location,data};
+	public void write(int location,int data) throws IOException{
+		int command = types.WRITE;
+		int rpcID   = 0;
+		int[] payload = {location,data};
 		
 		Message m = new Message(command,rpcID,payload);
 		
 		serializer.sendMessage(m);
 	}
 	
-	public Message readRPC(byte location){
-		byte command = types.WRITE;
-		byte rpcID   = 0;
-		byte[] payload = {location};
+	public Message readRPC(int location){
+		int command = types.WRITE;
+		int rpcID   = 0;
+		int[] payload = {location};
 		
 		Message m = new Message(command,rpcID,payload);
 		
 		return serializer.sendRPC(m);
 	}
 	
-	public void fill(byte[] payload) throws IOException{
-		byte command = types.FILL;
-		byte rpcID   = 0;
+	public void fill(int[] payload) throws IOException{
+		int command = types.FILL;
+		int rpcID   = 0;
 		
 		Message m = new Message(command,rpcID,payload);
 		
@@ -46,8 +46,8 @@ public class CardReaderProtocol extends Protocol{
 	}
 	
 	public Message pullRPC(){
-		byte command = types.PULL;
-		byte rpcID = 0;
+		int command = types.PULL;
+		int rpcID = 0;
 		
 		Message m = new Message(command,rpcID);
 		

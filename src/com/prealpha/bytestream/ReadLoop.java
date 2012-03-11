@@ -21,12 +21,12 @@ public class ReadLoop implements Runnable {
 		while(isReading){
 			try {
 				
-				byte type       = (byte)in.read();
-				byte id         = (byte)in.read();
-				byte length     = (byte)in.read();
-				byte[] payload = new byte[length]; 
+				int type       = in.read();
+				int id         = in.read();
+				int length     = in.read();
+				int[] payload = new int[length]; 
 				for(int i=0;i<length;i++){
-					payload[i]=(byte)in.read();
+					payload[i]=in.read();
 				}
 				
 				
