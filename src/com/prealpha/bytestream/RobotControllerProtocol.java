@@ -59,4 +59,13 @@ public class RobotControllerProtocol extends Protocol{
 
 		serializer.sendMessage(m);
 	}
+
+	public void sendUnknownMessage() throws IOException{
+		int command = types.UNKNOWN;
+		int rpcID = 0;
+		int [] payload = {};
+
+		Message m = new Message(command,rpcID,payload);
+		serializer.sendMessage(m);
+	}
 }
