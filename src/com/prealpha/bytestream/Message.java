@@ -24,13 +24,13 @@ public class Message {
 		}
 	}
 	
-	public void writeOut(OutputStream os) throws IOException{
-		os.write(type);
-		os.write(id);
-		os.write(length);
+	public void writeOut(MessageSerializer ms) throws IOException{
+                ms.writeByte(type);
+                ms.writeByte(id);
+                ms.writeByte(length);
 		
 		for(int i=0;i<payload.length;i++){
-			os.write(payload[i]);
+			ms.writeByte(payload[i]);
 		}
 	}
 }

@@ -42,12 +42,18 @@ public class MessageSerializer {
 			isConsuming = true;
 			while(!messageQueue.isEmpty())
 			{
-				messageQueue.poll().writeOut(out);
+				messageQueue.poll().writeOut(this);
 			}
 			isConsuming = false;
 		}
 	}
 
+        public void writeByte(int data)throws IOException{
+            out.write(data);
+            out.flush();
+            System.out.println(data);
+        }
+        
 	public void sendMessage(Message m) throws IOException{
 		messageQueue.add(m);
 		consumeMessageQueue();

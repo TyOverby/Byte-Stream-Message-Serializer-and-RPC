@@ -9,10 +9,16 @@ public abstract class Protocol {
 		this.serializer = serializer;
 	}
 	
+        public void writeByte(int data) throws IOException{
+            serializer.writeByte(data);
+        }
 	public void sendMessage(Message message) throws IOException{
 		serializer.sendMessage(message);
 	}
 	public Message sendRPC(Message message){
 		return serializer.sendRPC(message);
 	}
+        public MessageSerializer getMessageSerializer(){
+            return serializer;
+        }
 }
